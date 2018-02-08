@@ -1,0 +1,15 @@
+{
+  "presets": ["react-native"],
+  "env": {
+    "dev": {
+      "plugins": [
+        ["transform-es2015-modules-commonjs-simple", {
+            "noMangle": true
+        }]
+      ]
+    },
+    "development": {
+      "plugins": ["transform-react-jsx-source"]
+    }
+  }
+}
