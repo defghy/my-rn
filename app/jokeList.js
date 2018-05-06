@@ -28,13 +28,14 @@ const fetchJoke = ({curPage = 1, pageSize = 20}) => {
       let allPages = data.allPages;
       let allNum = data.allNum;
       let jokes = data.contentlist.map((joke, index) => {
+        let content = joke.text.replace(/\<br\s?\/\>/ig, '');
         return {
           title: joke.title,
           type: joke.type,
-          content: joke.text.replace(/\<br\s?\/\>/ig, ''),
+          content: content,
           timestamp: joke.ct,
           key: curPage+''+index,
-          collapse: true
+          collapse: content.length>60? true: false
         };
       });
 
@@ -74,6 +75,19 @@ class JokeList extends React.Component {
     });
   }
 
+  fetchNextPage() {
+    this.setState({
+      curPage: ++this.state.curPage
+    });
+
+    fetchJoke({
+      curPage: this.state.curPage,
+      pageSize: this.state.pageSize})
+    .then((jokes) => {
+      debugger;
+    });
+  }
+
   expandItem(item, index) {
     const tempData = cloneDeep(this.state.jokes);
     tempData[index].collapse = false;
@@ -82,21 +96,38 @@ class JokeList extends React.Component {
     });
   }
 
-  renderJokeItem(item, index) {
+  filterItem(item) {
     if(item.collapse) {
-      return (
-        <View style={styles.joke_item_wrapper}>
-          <Text style={styles.joke_item_title}>{item.title}</Text>
-          <Text style={styles.joke_item_content}
-            numberOfLines={3}>{item.content} <Text style={styles.joke_item_expand}  onPress={() => this.expandItem(item, index)}>详细展开</Text></Text>
+      return item.content.substring(0, 60)+ '...';
+    } else {
+      return item.content;
+    }
 
+  }
+
+  renderJokeItem(item, index) {
+
+    if(index == this.state.jokes.length - 1) {
+      return (
+        <View>
+          <View style={styles.joke_item_wrapper}>
+            <Text style={styles.joke_item_title}>{item.title}</Text>
+            <Text style={styles.joke_item_content}>{this.filterItem(item)} <Text style={styles.joke_item_expand}  onPress={() => this.expandItem(item, index)}>详细展开</Text></Text>
+          </View>
+          <TouchableHighlight style={styles.fetch_more}
+            onPress={this.fetchNextPage}>
+            <Text style={{
+              fontSize: 20,
+              color: '#999'
+            }}>点击加载更多</Text>
+          </TouchableHighlight>
         </View>
       );
     } else {
       return (
         <View style={styles.joke_item_wrapper}>
           <Text style={styles.joke_item_title}>{item.title}</Text>
-          <Text style={styles.joke_item_content}>{item.content}</Text>
+          <Text style={styles.joke_item_content}>{this.filterItem(item)} <Text style={styles.joke_item_expand}  onPress={() => this.expandItem(item, index)}>详细展开</Text></Text>
         </View>
       );
     }
@@ -134,6 +165,14 @@ const styles = StyleSheet.create({
   },
   joke_item_expand: {
     color: '#0084ff'
+  },
+  fetch_more: {
+    height: 60,
+    justifyContent: 'center',
+    alignItems:'center',
+    backgroundColor: '#fff',
+    borderTopWidth: 1,
+    borderTopColor: '#ccc'
   }
 });
 
