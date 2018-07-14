@@ -106,31 +106,30 @@ class JokeList extends React.Component {
   }
 
   renderJokeItem(item, index) {
+    return (
+      <View>
+        <View style={styles.joke_item_wrapper}>
+          <Text style={styles.joke_item_title}>{item.title}</Text>
+          <Text style={styles.joke_item_content}>
+            {this.filterItem(item)}
+            {
+              item.collapse?
+              <Text style={styles.joke_item_expand}  onPress={() => this.expandItem(item, index)}>详细展开</Text>: null
+            }
 
-    if(index == this.state.jokes.length - 1) {
-      return (
-        <View>
-          <View style={styles.joke_item_wrapper}>
-            <Text style={styles.joke_item_title}>{item.title}</Text>
-            <Text style={styles.joke_item_content}>{this.filterItem(item)} <Text style={styles.joke_item_expand}  onPress={() => this.expandItem(item, index)}>详细展开</Text></Text>
-          </View>
+          </Text>
+        </View>
+        {index == this.state.jokes.length - 1?
           <TouchableHighlight style={styles.fetch_more}
-            onPress={this.fetchNextPage}>
+          onPress={this.fetchNextPage}>
             <Text style={{
               fontSize: 20,
               color: '#999'
             }}>点击加载更多</Text>
-          </TouchableHighlight>
-        </View>
-      );
-    } else {
-      return (
-        <View style={styles.joke_item_wrapper}>
-          <Text style={styles.joke_item_title}>{item.title}</Text>
-          <Text style={styles.joke_item_content}>{this.filterItem(item)} <Text style={styles.joke_item_expand}  onPress={() => this.expandItem(item, index)}>详细展开</Text></Text>
-        </View>
-      );
-    }
+          </TouchableHighlight>: null}
+
+      </View>
+    );
   }
 
   render() {

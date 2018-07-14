@@ -40,20 +40,6 @@ const Tab = TabNavigator(
   }
 );
 
-const homeStack = StackNavigator({
-  home: {screen: webviewTest},
-  detail: {screen: Detail}
-}, {
-  initialRouteName: 'home'
-});
-
-const testStack = StackNavigator({
-  test: {screen: Test},
-  detail: {screen: Detail}
-}, {
-  initialRouteName: 'test'
-});
-
 const TopNav = StackNavigator({
   Tab: {screen: Tab},
   detail: {screen: Detail}
