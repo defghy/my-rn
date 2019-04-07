@@ -10,8 +10,8 @@
   },
   "dependencies": {
     "react": "16.2.0",
-    "react-native": "^0.59.3",
-    "react-native-svg": "^9.3.7",
+    "react-native": "^0.52.3",
+    "react-native-svg": "^6.0.0",
     "react-navigation": "^1.5.10"
   },
   "devDependencies": {
