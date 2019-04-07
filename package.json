@@ -1,15 +1,17 @@
 {
-  "name": "my-rn",
+  "name": "MYRN",
   "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "set NODE_ENV=dev&&node node_modules/react-native/local-cli/cli.js start",
     "android": "set NODE_ENV=dev&&react-native run-android",
+    "ios": "set NODE_ENV=dev&&react-native run-ios",
     "test": "jest"
   },
   "dependencies": {
     "react": "16.2.0",
-    "react-native": "0.52.2",
+    "react-native": "^0.59.3",
+    "react-native-svg": "^9.3.7",
     "react-navigation": "^1.5.10"
   },
   "devDependencies": {
