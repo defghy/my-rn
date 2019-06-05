@@ -4,22 +4,26 @@
   "private": true,
   "scripts": {
     "start": "set NODE_ENV=dev&&node node_modules/react-native/local-cli/cli.js start",
+    "start": "react-native start",
     "android": "set NODE_ENV=dev&&react-native run-android",
     "ios": "set NODE_ENV=dev&&react-native run-ios",
     "test": "jest"
   },
   "dependencies": {
-    "react": "16.2.0",
-    "react-native": "^0.52.3",
+    "react": "16.8.6",
+    "react-native": "0.60.0-rc.0",
     "react-native-svg": "^6.0.0",
     "react-navigation": "^1.5.10"
   },
   "devDependencies": {
-    "babel-jest": "22.1.0",
-    "babel-plugin-transform-es2015-modules-commonjs-simple": "^6.7.4",
-    "babel-preset-react-native": "4.0.0",
-    "jest": "22.1.4",
-    "react-test-renderer": "16.2.0"
+    "@babel/core": "^7.4.5",
+    "@babel/runtime": "^7.4.5",
+    "@react-native-community/eslint-config": "^0.0.5",
+    "babel-jest": "^24.8.0",
+    "eslint": "^5.16.0",
+    "jest": "^24.8.0",
+    "metro-react-native-babel-preset": "^0.54.1",
+    "react-test-renderer": "16.8.6"
   },
   "jest": {
     "preset": "react-native"
