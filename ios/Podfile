@@ -1,7 +1,7 @@
 platform :ios, '9.0'
 
-target 'RnDiffApp' do
-  # Pods for RnDiffApp
+target 'MyRn' do
+  # Pods for MyRn
   pod 'React', :path => '../node_modules/react-native/'
   pod 'React-Core', :path => '../node_modules/react-native/React'
   pod 'React-DevSupport', :path => '../node_modules/react-native/React'
@@ -27,17 +27,17 @@ target 'RnDiffApp' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  target 'RnDiffAppTests' do
+  target 'MyRnTests' do
     inherit! :search_paths
     # Pods for testing
   end
 
 end
 
-target 'RnDiffApp-tvOS' do
-  # Pods for RnDiffApp-tvOS
+target 'MyRn-tvOS' do
+  # Pods for MyRn-tvOS
 
-  target 'RnDiffApp-tvOSTests' do
+  target 'MyRn-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end
