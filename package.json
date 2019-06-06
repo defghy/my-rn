@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "set NODE_ENV=dev&&node node_modules/react-native/local-cli/cli.js start",
     "start": "react-native start",
     "android": "set NODE_ENV=dev&&react-native run-android",
     "ios": "set NODE_ENV=dev&&react-native run-ios",
@@ -13,6 +12,7 @@
     "react": "16.8.6",
     "react-native": "0.60.0-rc.0",
     "react-native-svg": "^6.0.0",
+    "react-native-vector-icons": "^6.4.2",
     "react-navigation": "^1.5.10"
   },
   "devDependencies": {
