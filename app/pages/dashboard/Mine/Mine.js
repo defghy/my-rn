@@ -7,7 +7,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import Page from 'MYRN/app/components/layout/Page';
 import BottomTab from 'MYRN/app/components/layout/BottomTab';
 
-export default class MCWebview extends Component {
+export default class Mine extends Component {
 
   state = {
 
