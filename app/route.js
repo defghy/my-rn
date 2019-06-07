@@ -7,9 +7,7 @@ import jokeList from './jokeList.js';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const router = createStackNavigator({
-  home: {
-    screen: webviewTest
-  }
+  home: require('./dashboard/home').default
 }, {
     initialRouteName: 'home',
 });
