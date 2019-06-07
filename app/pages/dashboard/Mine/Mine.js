@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Button, View
+  Button, View, Text
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
@@ -16,8 +16,10 @@ export default class MCWebview extends Component {
   render() {
     return (
       <Page>
-        <View style={styles.body}></View>
-        <BottomTab />
+        <View style={styles.body}>
+          <Text>我的</Text>
+        </View>
+        <BottomTab page="MINE" />
       </Page>
     );
   }

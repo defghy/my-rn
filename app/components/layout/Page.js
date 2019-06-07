@@ -1,8 +1,7 @@
 import React from 'react';
-import { View, TouchableHighlight } from 'react-native';
+import { View, StatusBar } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import Icon from 'react-native-vector-icons/dist/FontAwesome';
 
 class Page extends React.Component {
   state = {
@@ -16,9 +15,9 @@ class Page extends React.Component {
   render() {
     const { children } = this.props;
     return (
-      <View style={styles.page}>
+      <SafeAreaView style={styles.page}>
         {children}
-      </View>
+      </SafeAreaView>
     );
   }
 }
@@ -26,7 +25,8 @@ class Page extends React.Component {
 const styles = EStyleSheet.create({
   page: {
     flexDirection: 'column', height: '100%',
-    backgroundColor: '#f5f5f5'
+    backgroundColor: '#f5f5f5',
+    paddingTop: StatusBar.currentHeight
   }
 });
 
