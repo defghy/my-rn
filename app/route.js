@@ -1,15 +1,11 @@
-import React from 'react';
 import { createBottomTabNavigator, createAppContainer, createStackNavigator } from 'react-navigation';
-import webviewTest from './webview.js';
-import Test from './test.js';
-import Detail from './detail.js';
-import jokeList from './jokeList.js';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 const router = createStackNavigator({
-  home: require('./dashboard/home').default
+  'base/home': require('./pages/dashboard/home').default,
+  'base/mine': require('./pages/dashboard/home').default,
 }, {
-    initialRouteName: 'home',
+  initialRouteName: 'base/home',
+  headerMode: 'none',
 });
 
 export default router;

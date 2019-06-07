@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, PanResponder } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
-import Svg from './Component/svg.js';
+import Svg from './components/svg.js';
 
 class Detail extends React.Component {
 
@@ -15,7 +15,7 @@ class Detail extends React.Component {
   });
 
   componentDidMount() {
-  
+
   }
 
   render() {

@@ -5,6 +5,8 @@ import Test from './test.js';
 import Detail from './detail.js';
 import jokeList from './jokeList.js';
 import Icon from 'react-native-vector-icons/FontAwesome';
+
+import 'MYRN/app/utils/css/config';
 import route from './route';
 
 // const Tab = createBottomTabNavigator(
