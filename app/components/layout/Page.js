@@ -7,7 +7,7 @@ import { STATUS_BAR_HEIGHT } from 'MYRN/app/utils/global';
 
 class Page extends React.Component {
   static defaultProps = {
-    statusBarBackgroundColor: '#fff' // 默认选中
+    statusBarBackgroundColor: '#fff' // 状态栏背景色
   };
 
   state = {
@@ -43,6 +43,5 @@ const styles = EStyleSheet.create({
     backgroundColor: '#f5f5f5',
   }
 });
-
 
 export default Page;
