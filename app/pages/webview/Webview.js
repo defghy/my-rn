@@ -3,6 +3,7 @@ import {
   View
 } from 'react-native';
 import { WebView } from 'react-native-webview';
+import DeviceInfo from 'react-native-device-info';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 import Page from 'MYRN/app/components/layout/Page';
@@ -46,6 +47,7 @@ export default class RNWebView extends React.Component {
             } }}
             useWebKit
             allowsInlineMediaPlayback
+            userAgent={`${DeviceInfo.getUserAgent()} myrn`}
           />
         ) : this._emptyComponent()}
       </Page>
