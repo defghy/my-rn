@@ -3,7 +3,7 @@ import { createBottomTabNavigator, createAppContainer, createStackNavigator } fr
 const router = createStackNavigator({
   '/base/home': require('./pages/dashboard/Home/Home').default,
   '/base/mine': require('./pages/dashboard/Mine/Mine').default,
-  '/webview/index': require('./pages/webview/Webview').default,
+  '/webview/index': require('./pages/RnWebview/Webview').default,
 }, {
   initialRouteName: '/base/home',
   headerMode: 'none',
