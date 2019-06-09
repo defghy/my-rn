@@ -27,7 +27,8 @@ class SvtTest extends React.Component {
 
 const styles = EStyleSheet.create({
   body: {
-    flex: 1
+    flex: 1,
+    alignItems: 'center', justifyContent: 'center'
   }
 });
 

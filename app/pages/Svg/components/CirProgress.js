@@ -62,7 +62,7 @@ const getLabelPosition = (cx, cy, rMax, angleStart, angleEnd) => {
 };
 
 const CirProgress = (props) => {
-  const { size = 200, gap = 10, percent = 20 } = props;
+  const { size = 400, gap = 15, percent = 60 } = props;
 
   const startAngle = 0;
   const endAngle = (percent / 100) * 360;
@@ -70,9 +70,9 @@ const CirProgress = (props) => {
 
   return (
     <Svg
+      style={{backgroundColor: '#fff'}}
       width="300"
       height="300"
-      fill="#fff"
       viewBox="0 0 400 400"
     >
       <G x={0} y={0} origin={`${r}, ${r}`}>
