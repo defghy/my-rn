@@ -4,7 +4,8 @@ import jokeList from './jokeList.js';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import 'MYRN/app/utils/css/config';
-import route from './route';
+import route, { onRouteChange } from './route';
+import { setGlobalNavigator } from 'MYRN/app/utils/route';
 
 // const Tab = createBottomTabNavigator(
 //   {
@@ -66,4 +67,15 @@ import route from './route';
 //   initialRouteName: 'Tab'
 // });
 
-export default createAppContainer(route);
+const AppContainer = createAppContainer(route);
+
+export default class App extends React.Component {
+  render() {
+    return (
+      <AppContainer
+        ref={navigatorRef => setGlobalNavigator(navigatorRef)}
+        onNavigationStateChange={onRouteChange}
+      />
+    );
+  }
+}

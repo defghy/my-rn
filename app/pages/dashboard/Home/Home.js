@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Button, View, Text, TouchableHighlight, FlatList
+  View, Text, TouchableHighlight, FlatList
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import EStyleSheet from 'react-native-extended-stylesheet';
