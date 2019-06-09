@@ -4,6 +4,7 @@ const router = createStackNavigator({
   '/base/home': require('./pages/dashboard/Home/Home').default,
   '/base/mine': require('./pages/dashboard/Mine/Mine').default,
   '/webview/index': require('./pages/RnWebview/Webview').default,
+  '/svg/index': require('./pages/Svg/Svg').default,
 }, {
   initialRouteName: '/base/home',
   headerMode: 'none',

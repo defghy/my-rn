@@ -8,7 +8,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import Page from 'MYRN/app/components/layout/Page';
 import BottomTab from 'MYRN/app/components/layout/BottomTab';
 
-import Icon from 'react-native-vector-icons/dist/FontAwesome';
+import Icon from 'react-native-vector-icons/dist/AntDesign';
 
 @withNavigation
 class Home extends Component {
@@ -21,6 +21,7 @@ class Home extends Component {
         { title: 'Webview', route: '/webview/index', params: {
           url: 'https://crm-mobile.stage.yunshanmeicai.com/groupLeaderSplit/mine'
         }},
+        { title: 'Svg测试', route: '/svg/index'}
       ]
     };
   }
@@ -33,7 +34,7 @@ class Home extends Component {
         underlayColor="#efefef">
         <View style={styles.listItem}>
           <Text style={styles.listItemTitle}>{item.title}</Text>
-          <Icon name="chevron-right" style={styles.listItemIcon} />
+          <Icon name="right" style={styles.listItemIcon} />
         </View>
       </TouchableHighlight>
     );
@@ -71,7 +72,7 @@ const styles = EStyleSheet.create({
   },
   listItemTitle: {
     flex: 1,
-    fontSize: '16rem', color: '#333'
+    fontSize: '16rem', color: '#333', fontWeight: 'bold',
   },
   listItemIcon: {
     fontSize: '20rem', fontWeight: '300',
