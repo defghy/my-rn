@@ -1,93 +1,88 @@
-import React from 'react';
-import { Animated } from 'react-native';
-import Svg,{
-  Circle,
-  Ellipse,
-  G,
-  Text,
-  TSpan,
-  TextPath,
+import React from 'react'
+import Svg, {
   Path,
-  Polygon,
+  Circle,
+  Text,
   Polyline,
-  Line,
-  Rect,
-  Use,
-  Image,
-  Symbol,
-  Defs,
-  LinearGradient,
-  RadialGradient,
-  Stop,
-  ClipPath,
-  Pattern,
-  Mask,
+  G,
 } from 'react-native-svg';
 
-const AnimatedPath = Animated.createAnimatedComponent(Path);
-const ani = new Animated.Value(0);
+/**
+ * 获取圆周的坐标值
+ * @param cx 圆心x
+ * @param cy 圆心y
+ * @param r  半径
+ * @param angle 角度，以y轴开始
+ * @returns {*[]}
+ */
+const arcPoint = (cx, cy, r, angle) => {
+  const radian = (angle) => angle * (Math.PI / 180);
+  return [cx + r * Math.sin(radian(angle)), cy - r * Math.cos(radian(angle))];
+};
 
-class SvgTest extends React.Component {
-  state = {
-    len: new Animated.Value(0),
-    fade: new Animated.Value(0),
-    animatedFill: new Animated.Value(0),
-    path: ani.interpolate({
-      inputRange: [0, 1],
-      outputRange: [`M0,0L0,0`, `M0,0L400,400`],
-    })
-  };
-
-  componentDidMount() {
-    setInterval(() => {
-      const { len } = this.state;
-      if (len<=400) {
-        this.setState({
-          len: len + 20
-        });
-      }
-    }, 1000);  
-    const fadeAni = Animated.timing(                  // 随时间变化而执行动画
-      this.state.fade,            // 动画中的变量值
-      {
-        toValue: 1,                   // 透明度最终变为1，即完全不透明
-        duration: 500,              // 让动画持续一段时间
-        useNativeDriver: true
-      }
-    );
-
-    const lenAni = Animated.timing(                  // 随时间变化而执行动画
-      ani,            // 动画中的变量值
-      {
-        toValue: 1,                   // 透明度最终变为1，即完全不透明
-        duration: 3000
-      }
-    );  
-
-    Animated.parallel([fadeAni, lenAni]).start();
+/**
+ * 正圆的弧形
+ * @param cx  圆心x
+ * @param cy  圆心y
+ * @param rMin  内半径
+ * @param rMax  外半径
+ * @param angleStart  起始角度
+ * @param angleEnd  结束角度
+ * @returns {{d: string}}
+ */
+const arc = (cx, cy, rMin, rMax, angleStart, angleEnd) => {
+  const largeArcFlag = angleEnd - angleStart > 180 ? 1 : 0;
+  const d = [
+    `M${arcPoint(cx, cy, rMin, angleStart).join(',')}`,
+    `L${arcPoint(cx, cy, rMax, angleStart).join(',')}`,
+    `A${rMax},${rMax} 0 ${largeArcFlag},1 ${arcPoint(cx, cy, rMax, angleEnd).join(',')}`,
+    `L${arcPoint(cx, cy, rMin, angleEnd)}`,
+    `A${rMin},${rMin} 0 ${largeArcFlag},0 ${arcPoint(cx, cy, rMin, angleStart).join(',')}`,
+    `Z`
+  ];
+  return {
+    d: d.join(' ')
   }
-  render() {
-    const { len } = this.state;
-    return (
-      <Animated.View                 // 使用专门的可动画化的View组件
-        style={{
-          opacity: this.state.fade,         // 将透明度指定为动画变量值
-        }}
-      >
-      <Svg
-          width="300"
-          height="300"
-          fill="#fff"
-          stroke="#00f"
-          color="#f00"
-          viewBox="0 0 400 400"
-      >
-        <Circle cx="200" cy="200" r="200" fill="#fdd" stroke="none" />
-        <AnimatedPath d={this.state.path} stroke="#0f0" strokeWidth="32" />
-      </Svg>
-      </Animated.View>
-    );
-  }
-}
+};
 
-export default SvgTest;
+/**
+ * 获取弧形对应label坐标
+ * @param cx
+ * @param cy
+ * @param rMax
+ * @param angleStart
+ * @param angleEnd
+ * @returns {*[]}
+ */
+const getLabelPosition = (cx, cy, rMax, angleStart, angleEnd) => {
+  return [
+    arcPoint(cx, cy, rMax + 10, (angleEnd + angleStart) / 2),
+    arcPoint(cx, cy, rMax + 20, (angleEnd + angleStart) / 2),
+  ]
+};
+
+const CirProgress = (props) => {
+  const { size = 200, gap = 10, percent = 20 } = props;
+
+  const startAngle = 0;
+  const endAngle = (percent / 100) * 360;
+  const r = Math.round(size / 2);
+
+  return (
+    <Svg
+      width="300"
+      height="300"
+      fill="#fff"
+      viewBox="0 0 400 400"
+    >
+      <G x={0} y={0} origin={`${r}, ${r}`}>
+        <Path // 对应弧形
+          {...arc(r, r, r - 10, r, startAngle, endAngle)}
+          fill={'#1890ff'}
+        />
+      </G>
+    </Svg>
+  );
+};
+
+export default CirProgress;
