@@ -9,6 +9,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "mobx": "^4.9.4",
     "react": "16.8.6",
     "react-native": "0.60.0-rc.0",
     "react-native-device-info": "^2.1.1",
