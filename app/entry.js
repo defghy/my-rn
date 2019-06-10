@@ -2,10 +2,12 @@ import React from 'react';
 import { createBottomTabNavigator, createAppContainer, createStackNavigator } from 'react-navigation';
 import jokeList from './jokeList.js';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { Provider } from "mobx-react";
 
 import 'MYRN/app/utils/css/config';
 import route, { onRouteChange } from './route';
 import { setGlobalNavigator } from 'MYRN/app/utils/route';
+import store from './store';
 
 // const Tab = createBottomTabNavigator(
 //   {
@@ -72,10 +74,12 @@ const AppContainer = createAppContainer(route);
 export default class App extends React.Component {
   render() {
     return (
-      <AppContainer
-        ref={navigatorRef => setGlobalNavigator(navigatorRef)}
-        onNavigationStateChange={onRouteChange}
-      />
+      <Provider {...store} >
+        <AppContainer
+          ref={navigatorRef => setGlobalNavigator(navigatorRef)}
+          onNavigationStateChange={onRouteChange}
+        />
+      </Provider>
     );
   }
 }

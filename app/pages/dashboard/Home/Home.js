@@ -21,7 +21,8 @@ class Home extends Component {
         { title: 'Webview', route: '/webview/index', params: {
           url: 'https://crm-mobile.stage.yunshanmeicai.com/groupLeaderSplit/mine'
         }},
-        { title: 'Svg测试', route: '/svg/index'}
+        { title: 'Svg测试', route: '/svg/index'},
+        { title: 'Ajax测试', route: '/ajax/index'},
       ]
     };
   }

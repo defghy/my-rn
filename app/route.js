@@ -5,6 +5,7 @@ export const routers = {
   '/base/mine': require('./pages/dashboard/Mine/Mine').default,
   '/webview/index': { title: 'webview', screen: require('./pages/RnWebview/Webview').default },
   '/svg/index': { title: 'svg测试', screen: require('./pages/Svg/Svg').default },
+  '/ajax/index': { title: 'Ajax测试', screen: require('./pages/Ajax/Ajax').default },
 };
 
 const stackRouter = createStackNavigator(routers, {

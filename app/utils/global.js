@@ -16,3 +16,5 @@ export const IS_IPHONEX = (function() {
 
 export const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ?
   (IS_IPHONEX ? 44 : 20) : StatusBar.currentHeight;
+
+export const BASE_URL = 'https://crm-manager.stage.yunshanmeicai.com';
