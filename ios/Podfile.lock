@@ -57,6 +57,14 @@ PODS:
     - React-cxxreact (= 0.60.0-rc.0)
     - React-jsi (= 0.60.0-rc.0)
   - React-jsinspector (0.60.0-rc.0)
+  - react-native-camera (2.10.2):
+    - React
+    - react-native-camera/RCT (= 2.10.2)
+    - react-native-camera/RN (= 2.10.2)
+  - react-native-camera/RCT (2.10.2):
+    - React
+  - react-native-camera/RN (2.10.2):
+    - React
   - react-native-webview (5.11.0):
     - React
   - React-RCTActionSheet (0.60.0-rc.0):
@@ -105,6 +113,7 @@ DEPENDENCIES:
   - React-jsi (from `../node_modules/react-native/ReactCommon/jsi`)
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
+  - react-native-camera (from `../node_modules/react-native-camera`)
   - react-native-webview (from `../node_modules/react-native-webview`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -149,6 +158,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsiexecutor"
   React-jsinspector:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
+  react-native-camera:
+    :path: "../node_modules/react-native-camera"
   react-native-webview:
     :path: "../node_modules/react-native-webview"
   React-RCTActionSheet:
@@ -195,6 +206,7 @@ SPEC CHECKSUMS:
   React-jsi: 7bd073b2b21e2957ebf0f014b285a4255ae07e53
   React-jsiexecutor: e5e1c3d5d183bbab643ec67c357812fe6d81a4de
   React-jsinspector: 7cb6a40fd9f760abea63d5fa1283191f16b8ae65
+  react-native-camera: ea85f74cf2e501d2a91a3da7092ecdac082f18df
   react-native-webview: 03bb6d5ef662f9909676e61ab940e4b8befad77f
   React-RCTActionSheet: 5330c63667bc2c1511ca3d2b6c37ec0dbddf9e3c
   React-RCTAnimation: 9b8862196b45318bd0c906d560594e24df9aa00b
@@ -212,6 +224,6 @@ SPEC CHECKSUMS:
   RNVectorIcons: 6607bd3a30291d0edb56f9bbe7ae411ee2b928b0
   yoga: f68b6ec7903591b388d511a2380b8ac3a4c01a03
 
-PODFILE CHECKSUM: 14390dbe2f121f57146d9fa8b1358e829ce1f760
+PODFILE CHECKSUM: a5101bc331a1c343640e235276656f800504daf6
 
 COCOAPODS: 1.6.0.beta.2
