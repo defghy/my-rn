@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, PanResponder } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 import Page from 'MYRN/app/components/layout/Page';
@@ -7,7 +7,7 @@ import Header from 'MYRN/app/components/layout/Header';
 
 import { RNCamera } from 'react-native-camera';
 
-class SvtTest extends React.Component {
+class CameraTest extends React.Component {
 
   componentDidMount() {
 
@@ -51,7 +51,7 @@ class SvtTest extends React.Component {
               }}
             />
             <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}>
-              <TouchableOpacity onPress={this.takePicture.bind(this)} style={styles.capture}>
+              <TouchableOpacity onPress={this.takePicture} style={styles.capture}>
                 <Text style={{ fontSize: 14 }}> SNAP </Text>
               </TouchableOpacity>
             </View>
@@ -88,4 +88,4 @@ const styles = EStyleSheet.create({
   },
 });
 
-export default SvtTest;
+export default CameraTest;
