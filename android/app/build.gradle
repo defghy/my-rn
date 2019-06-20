@@ -29,7 +29,7 @@ import com.android.build.OutputFile
  *
  *   // whether to bundle JS and assets in another build variant (if configured).
  *   // See http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Build-Variants
- *   // The configuration property can be in the following formats
+ *   // The configuration property can be in the following formatreact-native-gesture-handlers
  *   //         'bundleIn${productFlavor}${buildType}'
  *   //         'bundleIn${buildType}'
  *   // bundleInFreeDebug: true,
@@ -188,4 +188,4 @@ task copyDownloadableDepsToLibs(type: Copy) {
     into 'libs'
 }
 
-apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
+// apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
