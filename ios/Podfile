@@ -38,19 +38,4 @@ target 'MyRn' do
 
   pod 'react-native-camera', :path => '../node_modules/react-native-camera'
 
-  target 'MyRnTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
-end
-
-target 'MyRn-tvOS' do
-  # Pods for MyRn-tvOS
-
-  target 'MyRn-tvOSTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
 end
