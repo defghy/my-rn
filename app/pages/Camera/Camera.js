@@ -4,13 +4,19 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 
 import Page from 'MYRN/app/components/layout/Page';
 import Header from 'MYRN/app/components/layout/Header';
-import TakePicPopup from './components/TakePicPopup';
 
+import TakePicPopup from './components/TakePicPopup';
+import ScanPopup from './components/ScanCodePopup';
+import ScanFacePopup from './components/ScanFacePopup';
+import ScanTextPopup from './components/ScanTextPopup';
 
 class CameraTest extends React.Component {
 
   state = {
-    picUrl: ''
+    picUrl: '',
+    code: '',
+    faceData: '',
+    txt: ''
   };
 
   componentDidMount() {
@@ -30,12 +36,46 @@ class CameraTest extends React.Component {
     });
   };
 
+  scanCode = async () => {
+    global.popup({
+      content: ScanPopup,
+      props: {
+        onSave: ({data, type}) => {
+          this.setState({ code: `type: ${type}; data: ${data}` });
+        }
+      }
+    });
+  }
+
+  scanFace = async () => {
+    global.popup({
+      content: ScanFacePopup,
+      props: {
+        onSave: (data) => {
+          this.setState({ faceData: data });
+        }
+      }
+    });
+  }
+
+  scanText = async () => {
+    global.popup({
+      content: ScanTextPopup,
+      props: {
+        onSave: (data) => {
+          this.setState({ txt: data });
+        }
+      }
+    });
+  }
+
   render() {
-    const { picUrl } = this.state;
+    const { picUrl, code, faceData, txt } = this.state;
     return (
       <Page>
         <Header />
         <View style={styles.body}>
+
           <View style={styles.imgWrapper}>
             { !!picUrl &&
               <Image
@@ -45,8 +85,32 @@ class CameraTest extends React.Component {
             }
           </View>
           <TouchableOpacity onPress={this.takePicture} style={styles.btn}>
-            <Text style={styles.btnText}> 拍照 </Text>
+            <Text style={styles.btnText}>拍照</Text>
           </TouchableOpacity>
+
+          <View>
+            { !!code &&
+              <Text>{code}</Text>
+            }
+          </View>
+          <TouchableOpacity onPress={this.scanCode} style={styles.btn}>
+            <Text style={styles.btnText}>扫码</Text>
+          </TouchableOpacity>
+
+          {/* 依赖 Google Service
+          <TouchableOpacity onPress={this.scanFace} style={styles.btn}>
+            <Text style={styles.btnText}>人脸识别</Text>
+          </TouchableOpacity>
+
+          <View>
+            { !!txt &&
+              <Text>{txt}</Text>
+            }
+          </View>
+          <TouchableOpacity onPress={this.scanText} style={styles.btn}>
+            <Text style={styles.btnText}>文字识别</Text>
+          </TouchableOpacity>*/}
+
         </View>
       </Page>
     );

@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 import { RNCamera } from 'react-native-camera';
+import BarcodeMask from 'react-native-barcode-mask';
 import Icon from 'react-native-vector-icons/dist/AntDesign';
 
 import Page from 'MYRN/app/components/layout/Page';
@@ -14,13 +15,9 @@ class TCPopup extends React.Component {
 
   }
 
-  takePicture = async() => {
-    if (this.camera) {
-      const options = { quality: 0.5, base64: true };
-      const data = await this.camera.takePictureAsync(options);
-      this.props.onSave(data);
-      this.props.close();
-    }
+  scanBarCode = ({ data, type }) => {
+    this.props.onSave({data, type});
+    this.props.close();
   };
 
   render() {
@@ -38,24 +35,20 @@ class TCPopup extends React.Component {
           style={styles.camera}
           type={RNCamera.Constants.Type.back}
           flashMode={RNCamera.Constants.FlashMode.auto}
+          barCodeTypes={[
+            RNCamera.Constants.BarCodeType.qr,
+            RNCamera.Constants.BarCodeType.ean13
+          ]}
           androidCameraPermissionOptions={{
             title: '请求摄像头权限',
             message: '需要摄像头来拍照',
             buttonPositive: '同意',
             buttonNegative: '取消',
           }}
-          androidRecordAudioPermissionOptions={{
-            title: '请求录音权限',
-            message: '这个声音不知道有啥用',
-            buttonPositive: '同意',
-            buttonNegative: '取消',
-          }}
-        />
-        <View style={styles.capWrapper}>
-          <TouchableOpacity onPress={this.takePicture} style={styles.capture}>
-            <Text style={styles.captureText}>拍</Text>
-          </TouchableOpacity>
-        </View>
+          onBarCodeRead={this.scanBarCode}
+        >
+          <BarcodeMask />
+        </RNCamera>
       </View>
     );
   }

@@ -34,6 +34,7 @@ class Header extends Component {
     const { leftAction, navigation } = this.props;
     return (
       <TouchableHighlight
+        style={styles.hleft}
         onPress={leftAction}
         underlayColor="#eee">
         <Icon name="left" style={styles.iconLeft} />
