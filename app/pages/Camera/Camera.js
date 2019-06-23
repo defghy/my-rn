@@ -1,61 +1,52 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Image, Button } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 import Page from 'MYRN/app/components/layout/Page';
 import Header from 'MYRN/app/components/layout/Header';
+import TakePicPopup from './components/TakePicPopup';
 
-import { RNCamera } from 'react-native-camera';
 
 class CameraTest extends React.Component {
+
+  state = {
+    picUrl: ''
+  };
 
   componentDidMount() {
 
   }
 
   takePicture = async() => {
-    if (this.camera) {
-      const options = { quality: 0.5, base64: true };
-      const data = await this.camera.takePictureAsync(options);
-      console.log(data.uri);
-    }
+    global.popup({
+      content: TakePicPopup,
+      props: {
+        onSave: data => {
+          this.setState({
+            picUrl: data.uri
+          });
+        }
+      }
+    });
   };
 
   render() {
+    const { picUrl } = this.state;
     return (
       <Page>
         <Header />
         <View style={styles.body}>
-          <View style={styles.container}>
-            <RNCamera
-              ref={ref => {
-                this.camera = ref;
-              }}
-              style={styles.preview}
-              type={RNCamera.Constants.Type.back}
-              flashMode={RNCamera.Constants.FlashMode.on}
-              androidCameraPermissionOptions={{
-                title: 'Permission to use camera',
-                message: 'We need your permission to use your camera',
-                buttonPositive: 'Ok',
-                buttonNegative: 'Cancel',
-              }}
-              androidRecordAudioPermissionOptions={{
-                title: 'Permission to use audio recording',
-                message: 'We need your permission to use your audio',
-                buttonPositive: 'Ok',
-                buttonNegative: 'Cancel',
-              }}
-              onGoogleVisionBarcodesDetected={({ barcodes }) => {
-                console.log(barcodes);
-              }}
-            />
-            <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}>
-              <TouchableOpacity onPress={this.takePicture} style={styles.capture}>
-                <Text style={{ fontSize: 14 }}> SNAP </Text>
-              </TouchableOpacity>
-            </View>
+          <View style={styles.imgWrapper}>
+            { !!picUrl &&
+              <Image
+                style={{width: '100%', height: '100%'}}
+                source={{uri: picUrl}}
+              />
+            }
           </View>
+          <TouchableOpacity onPress={this.takePicture} style={styles.btn}>
+            <Text style={styles.btnText}> 拍照 </Text>
+          </TouchableOpacity>
         </View>
       </Page>
     );
@@ -64,28 +55,22 @@ class CameraTest extends React.Component {
 
 const styles = EStyleSheet.create({
   body: {
-    flex: 1,
-    alignItems: 'center', justifyContent: 'center'
+    alignItems: 'center'
   },
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: 'black',
+  imgWrapper: {
+    height: '100rem', width: '100rem',
+    borderColor: '#979797', borderWidth: EStyleSheet.hairlineWidth,
   },
-  preview: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-  capture: {
-    flex: 0,
-    backgroundColor: '#fff',
+  btn: {
+    backgroundColor: '#0084ff',
     borderRadius: 5,
-    padding: 15,
-    paddingHorizontal: 20,
-    alignSelf: 'center',
-    margin: 20,
+    paddingVertical: 10, paddingHorizontal: 20,
+    marginTop: '10rem'
   },
+  btnText: {
+    color: '#fff',
+    fontSize: '14rem', fontWeight: 'bold'
+  }
 });
 
 export default CameraTest;
