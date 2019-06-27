@@ -23,7 +23,8 @@ class Home extends Component {
       }},
       { title: 'Svg测试', route: '/svg/index'},
       { title: 'Ajax测试', route: '/ajax/index'},
-      { title: 'Camera测试', route: '/camera/index' }
+      { title: 'Camera测试', route: '/camera/index' },
+      { title: 'Snapshot测试', route: '/snapshot/index' }
     ];
     tools.forEach(tool => {
       tool.data = tool.data || [];

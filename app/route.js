@@ -7,6 +7,7 @@ export const routers = {
   '/svg/index': { title: 'svg测试', screen: require('./pages/Svg/Svg').default },
   '/ajax/index': { title: 'Ajax测试', screen: require('./pages/Ajax/Ajax').default },
   '/camera/index': { title: 'Camera测试', screen: require('./pages/Camera/Camera').default },
+  '/snapshot/index': { title: 'SnapShot测试', screen: require('./pages/SnapShot/index').default },
 };
 
 const stackRouter = createStackNavigator(routers, {
