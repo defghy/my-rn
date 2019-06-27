@@ -17,11 +17,11 @@
 
 #### 使用的框架
 
-- icon: [https://github.com/oblador/react-native-vector-icons](react-native-vector-icons)
-- 设备信息: [https://github.com/react-native-community/react-native-device-info](react-native-device-info)
-- 导航: [https://reactnavigation.org/docs/zh-Hans/navigation-prop.html](react-navigation)
-- webview: [https://github.com/react-native-community/react-native-webview/blob/master/docs/Reference.md](react-native-webview)
-- svg: [https://github.com/react-native-community/react-native-svg#installation](react-native-svg)
-- 摄像头: [https://github.com/react-native-community/react-native-camera/blob/master/docs/RNCamera.md](react-native-camera)
-- 截屏: [https://github.com/gre/react-native-view-shot](react-native-view-shot)
+- icon: [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons)
+- 设备信息: [react-native-device-info](https://github.com/react-native-community/react-native-device-info)
+- 导航: [react-navigation](https://reactnavigation.org/docs/zh-Hans/navigation-prop.html)
+- webview: [react-native-webview](https://github.com/react-native-community/react-native-webview/blob/master/docs/Reference.md)
+- svg: [react-native-svg](https://github.com/react-native-community/react-native-svg#installation)
+- 摄像头: [react-native-camera](https://github.com/react-native-community/react-native-camera/blob/master/docs/RNCamera.md)
+- 截屏: [react-native-view-shot](https://github.com/gre/react-native-view-shot)
 
