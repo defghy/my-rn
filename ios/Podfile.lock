@@ -86,6 +86,8 @@ PODS:
     - React
   - RNVectorIcons (6.4.2):
     - React
+  - RNViewShot (2.6.0):
+    - React
   - yoga (0.59.9.React)
 
 DEPENDENCIES:
@@ -114,6 +116,7 @@ DEPENDENCIES:
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
+  - RNViewShot (from `../node_modules/react-native-view-shot`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -141,6 +144,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-svg"
   RNVectorIcons:
     :path: "../node_modules/react-native-vector-icons"
+  RNViewShot:
+    :path: "../node_modules/react-native-view-shot"
   yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -156,8 +161,9 @@ SPEC CHECKSUMS:
   RNGestureHandler: 5329a942fce3d41c68b84c2c2276ce06a696d8b0
   RNSVG: 9cb6e958c4b6a1f58185ac72a350b148947d6fed
   RNVectorIcons: 6607bd3a30291d0edb56f9bbe7ae411ee2b928b0
+  RNViewShot: 05672e0b3c36cd70633466614b4451869a70c6c7
   yoga: 03ff42a6f223fb88deeaed60249020d80c3091ee
 
-PODFILE CHECKSUM: cc36032086aabf086dfc2bc5e2dec835058ca2b9
+PODFILE CHECKSUM: fd51848a75cedfbe4ff1988c6154e6a137d866b2
 
 COCOAPODS: 1.6.0.beta.2

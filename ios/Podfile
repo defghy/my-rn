@@ -38,4 +38,6 @@ target 'MyRn' do
 
   pod 'react-native-camera', :path => '../node_modules/react-native-camera'
 
+  pod 'RNViewShot', :path => '../node_modules/react-native-view-shot'
+
 end
