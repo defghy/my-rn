@@ -17,7 +17,7 @@
 
 #### 使用的框架
 
--icon: [https://github.com/oblador/react-native-vector-icons](react-native-vector-icons)
+- icon: [https://github.com/oblador/react-native-vector-icons](react-native-vector-icons)
 - 设备信息: [https://github.com/react-native-community/react-native-device-info](react-native-device-info)
 - 导航: [https://reactnavigation.org/docs/zh-Hans/navigation-prop.html](react-navigation)
 - webview: [https://github.com/react-native-community/react-native-webview/blob/master/docs/Reference.md](react-native-webview)
