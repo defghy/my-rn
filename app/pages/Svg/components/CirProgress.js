@@ -5,6 +5,9 @@ import Svg, {
   Circle,
   Text,
   Polyline,
+  Defs,
+  LinearGradient,
+  Stop,
   G,
 } from 'react-native-svg';
 
@@ -50,7 +53,7 @@ class CirProgress extends React.Component {
   constructor(props) {
     super(props);
 
-    const { size = 400, gap = 15, percent = 60 } = props;
+    const { size = 400, gap = 15, percent = 95 } = props;
 
     const startAngle = 0;
     const endAngle = (percent / 100) * 360;
@@ -87,10 +90,16 @@ class CirProgress extends React.Component {
         height="300"
         viewBox="0 0 400 400"
       >
+      <Defs>
+        <LinearGradient id="linear" x1="0" y1="0" x2="170" y2="0">
+          <Stop offset="0"   stopColor="rgb(255,255,0)"/>
+          <Stop offset="1" stopColor="red"/>
+        </LinearGradient>
+      </Defs>
         <G x={0} y={0} origin={`${r}, ${r}`}>
           <AnimatedPath // 对应弧形
             d={this.state.path}
-            fill={'#1890ff'}
+             fill="url(#linear)"
           />
         </G>
       </Svg>
