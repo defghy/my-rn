@@ -16,7 +16,7 @@ PODS:
     - React
   - react-native-camera/RN (2.11.0):
     - React
-  - react-native-webview (5.11.0):
+  - react-native-webview (6.3.1):
     - React
   - React/ART (0.59.9):
     - React/Core
@@ -156,7 +156,7 @@ SPEC CHECKSUMS:
   glog: aefd1eb5dda2ab95ba0938556f34b98e2da3a60d
   React: a86b92f00edbe1873a63e4a212c29b7a7ad5224f
   react-native-camera: 37580137d13b0f2fabd631e4217eb11f0e4d5764
-  react-native-webview: 03bb6d5ef662f9909676e61ab940e4b8befad77f
+  react-native-webview: 048135293d160a64d329e11d52d0128c67942813
   RNDeviceInfo: e597edb4f21157bc83ba420c0ba6962ab9fec322
   RNGestureHandler: 5329a942fce3d41c68b84c2c2276ce06a696d8b0
   RNSVG: 9cb6e958c4b6a1f58185ac72a350b148947d6fed
