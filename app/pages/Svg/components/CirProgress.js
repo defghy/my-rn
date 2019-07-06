@@ -36,11 +36,13 @@ const arcPoint = (cx, cy, r, angle) => {
  */
 const arc = (cx, cy, rMin, rMax, angleStart, angleEnd) => {
   const largeArcFlag = angleEnd - angleStart > 180 ? 1 : 0;
+
+  const gap = (rMax - rMin)/2;
   const d = [
     `M${arcPoint(cx, cy, rMin, angleStart).join(',')}`,
     `L${arcPoint(cx, cy, rMax, angleStart).join(',')}`,
     `A${rMax},${rMax} 0 ${largeArcFlag},1 ${arcPoint(cx, cy, rMax, angleEnd).join(',')}`,
-    `L${arcPoint(cx, cy, rMin, angleEnd)}`,
+    `A${gap},${gap} 0 1, 1 ${arcPoint(cx, cy, rMin, angleEnd).join(',')}`,
     `A${rMin},${rMin} 0 ${largeArcFlag},0 ${arcPoint(cx, cy, rMin, angleStart).join(',')}`,
     `Z`
   ];
@@ -53,7 +55,7 @@ class CirProgress extends React.Component {
   constructor(props) {
     super(props);
 
-    const { size = 400, gap = 15, percent = 95 } = props;
+    const { size = 400, gap = 15, percent = 35 } = props;
 
     const startAngle = 0;
     const endAngle = (percent / 100) * 360;
