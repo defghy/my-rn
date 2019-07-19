@@ -8,6 +8,7 @@ export const routers = {
   '/ajax/index': { title: 'Ajax测试', screen: require('./pages/Ajax/Ajax').default },
   '/camera/index': { title: 'Camera测试', screen: require('./pages/Camera/Camera').default },
   '/snapshot/index': { title: 'SnapShot测试', screen: require('./pages/SnapShot/index').default },
+  '/map/baidu': { title: '百度地图测试', screen: require('./pages/GepMap/BaiduMap').default },
 };
 
 const stackRouter = createStackNavigator(routers, {
