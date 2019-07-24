@@ -2,7 +2,6 @@ import React from 'react';
 import {
   View
 } from 'react-native';
-import { MapView, MapTypes, Geolocation, Overlay } from 'react-native-baidu-map';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 import Page from 'MYRN/app/components/layout/Page';
@@ -26,16 +25,7 @@ export default class RNWebView extends React.Component {
       <Page>
         <Header />
         <View style={styles.container}>
-          <MapView
-            width={500}
-            height={400}
-            zoom={18}
-            trafficEnabled={true}
-            zoomControlsVisible={true}
-            mapType={MapTypes.SATELLITE}
-            center={{ longitude: 113.960453, latitude: 22.546045 }}
-          >
-          </MapView>
+          暂无
         </View>
       </Page>
     );
