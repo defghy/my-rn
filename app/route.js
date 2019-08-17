@@ -10,6 +10,7 @@ export const routers = {
   '/snapshot/index': { title: 'SnapShot测试', screen: require('./pages/SnapShot/index').default },
   '/map/baidu': { title: '百度地图测试', screen: require('./pages/GeoMap/BaiduMap').default },
   '/gesture/drag': { title: '拖拽测试', screen: require('./pages/Gesture/Drag').default },
+  '/native/modules': { title: 'nativeModules测试', screen: require('./pages/Native/NativeModules').default },
 };
 
 const stackRouter = createStackNavigator(routers, {

@@ -30,6 +30,9 @@ class Home extends Component {
       ]},
       { title: '手势', data: [
         {title: '拖拽测试', route: '/gesture/drag'}
+      ]},
+      { title: 'native', data: [
+        {title: 'Native Modules测试', route: '/native/modules'}
       ]}
     ];
     tools.forEach(tool => {
