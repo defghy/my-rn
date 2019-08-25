@@ -40,4 +40,6 @@ target 'MyRn' do
 
   pod 'RNViewShot', :path => '../node_modules/react-native-view-shot'
 
+  pod 'react-native-amap3d', path: '../node_modules/react-native-amap3d/lib/ios'
+
 end

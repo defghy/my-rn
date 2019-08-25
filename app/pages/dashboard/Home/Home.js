@@ -26,7 +26,8 @@ class Home extends Component {
       { title: 'Camera测试', route: '/camera/index' },
       { title: 'Snapshot测试', route: '/snapshot/index' },
       { title: '地图测试', data: [
-        {title: '百度地图', route: '/map/baidu'}
+        {title: '百度地图(不通)', route: '/map/baidu'},
+        {title: '高德地图', route: '/map/autonavi'}
       ]},
       { title: '手势', data: [
         {title: '拖拽测试', route: '/gesture/drag'}

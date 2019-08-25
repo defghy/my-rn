@@ -24,4 +24,5 @@
 - svg: [react-native-svg](https://github.com/react-native-community/react-native-svg#installation)
 - 摄像头: [react-native-camera](https://github.com/react-native-community/react-native-camera/blob/master/docs/RNCamera.md)
 - 截屏: [react-native-view-shot](https://github.com/gre/react-native-view-shot)
+- 地图: [react-native-amap3d](https://github.com/qiuxiang/react-native-amap3d)
 

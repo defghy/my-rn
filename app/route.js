@@ -9,6 +9,7 @@ export const routers = {
   '/camera/index': { title: 'Camera测试', screen: require('./pages/Camera/Camera').default },
   '/snapshot/index': { title: 'SnapShot测试', screen: require('./pages/SnapShot/index').default },
   '/map/baidu': { title: '百度地图测试', screen: require('./pages/GeoMap/BaiduMap').default },
+  '/map/autonavi': { title: '高德地图测试', screen: require('./pages/GeoMap/AMap').default },
   '/gesture/drag': { title: '拖拽测试', screen: require('./pages/Gesture/Drag').default },
   '/native/modules': { title: 'nativeModules测试', screen: require('./pages/Native/NativeModules').default },
 };
