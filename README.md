@@ -1,3 +1,6 @@
+## 说明
+react native脚手架，用于日常开发
+
 ## 启动
 
 #### Android
