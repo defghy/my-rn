@@ -10,6 +10,7 @@ import { setGlobalNavigator } from 'MYRN/app/utils/route';
 import store from './store';
 
 import Popup from 'MYRN/app/components/modal/Popup';
+import Debugger from 'MYRN/app/components/debug';
 
 const AppContainer = createAppContainer(route);
 
@@ -23,6 +24,7 @@ export default class App extends React.Component {
             onNavigationStateChange={onRouteChange}
           />
           <Popup />
+          <Debugger />
         </View>
       </Provider>
     );

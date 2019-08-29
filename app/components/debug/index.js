@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import { withNavigation } from 'react-navigation';
 import {
   View, Text, TouchableHighlight, FlatList
 } from 'react-native';
 import Icon from 'react-native-vector-icons/dist/AntDesign';
 
-@withNavigation
+import dragable from 'MYRN/app/components/hoc/Dragable'
+
+@dragable({ size: 40, initPos: { x: 0, y: 400 } })
 class DebugTool extends Component {
 
   static defaultProps = {
@@ -28,10 +29,17 @@ class DebugTool extends Component {
 
   }
 
-  render () {
-    return (
-      <View style={styles.trigger}>
+  openDebug = () => {
+    console.log('test');
+  }
 
+  render () {
+    const { focus } = this.props;
+    return (
+      <View style={{...styles.trigger, ...{opacity: focus? 0.6: 0.3 }}}>
+        <Icon
+          name="setting"
+          style={{fontSize: 30, color: '#fff'}} />
       </View>
     );
   }
@@ -39,12 +47,10 @@ class DebugTool extends Component {
 
 const styles = EStyleSheet.create({
   trigger: {
-    position: 'relative', width: '100%',
-    backgroundColor: '#f5f5f5', color: '#333',
-    height: '44rem',
-    fontSize: '18rem',
-    overflow: 'hidden',
-    flexShrink: 0, flexDirection: 'row'
+    width: '100%', height: '100%',
+    borderRadius: 10,
+    backgroundColor: '#000',
+    display: 'flex', alignItems: 'center', justifyContent: 'center'
   }
 });
 
