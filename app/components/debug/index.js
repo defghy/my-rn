@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {
-  View, Text, TouchableHighlight, FlatList
+  View, Text, Modal
 } from 'react-native';
 import Icon from 'react-native-vector-icons/dist/AntDesign';
 
-import dragable from 'MYRN/app/components/hoc/Dragable'
+import dragable from 'MYRN/app/components/hoc/Dragable';
+import DebugInfo from './Debugger';
 
 @dragable({
   size: 40,
@@ -23,7 +24,7 @@ class DebugTool extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      showDebug: false
     };
   }
 
@@ -36,16 +37,33 @@ class DebugTool extends Component {
   }
 
   openDebug = () => {
-    console.log('test');
-  }
+    this.setState({
+      showDebug: true
+    });
+  };
+
+  closeDebug = () => {
+    this.setState({
+      showDebug: false
+    });
+  };
 
   render () {
     const { focus } = this.props;
+    const { showDebug } = this.state;
     return (
       <View style={{...styles.trigger, ...{opacity: focus? 0.6: 0.3 }}}>
         <Icon
           name="setting"
           style={{fontSize: 40, color: '#fff'}} />
+        <Modal
+          visible={showDebug}
+          animationType="fade"
+          transparent={true}
+          onRequestClose={this.closeDebug}
+        >
+          <DebugInfo close={this.closeDebug} />
+        </Modal>
       </View>
     );
   }
