@@ -7,7 +7,13 @@ import Icon from 'react-native-vector-icons/dist/AntDesign';
 
 import dragable from 'MYRN/app/components/hoc/Dragable'
 
-@dragable({ size: 40, initPos: { x: 0, y: 400 } })
+@dragable({
+  size: 40,
+  initPos: { x: 0, y: 400 },
+  callbacks: {
+    onClick: 'openDebug'
+  }
+})
 class DebugTool extends Component {
 
   static defaultProps = {
@@ -39,7 +45,7 @@ class DebugTool extends Component {
       <View style={{...styles.trigger, ...{opacity: focus? 0.6: 0.3 }}}>
         <Icon
           name="setting"
-          style={{fontSize: 30, color: '#fff'}} />
+          style={{fontSize: 40, color: '#fff'}} />
       </View>
     );
   }

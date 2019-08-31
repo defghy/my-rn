@@ -6,7 +6,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 
 import { DEVICE_WIDTH, DEVICE_HEIGHT } from 'MYRN/app/utils/global'
 
-const dragable = (({ size = 50, initPos = { x: 0, y: 0 } }) => (Content) =>
+const dragable = (({ size = 50, initPos = { x: 0, y: 0 }, callbacks = {} }) => (Content) =>
   class Dragable extends React.Component {
     constructor(props) {
       super(props);
@@ -33,8 +33,14 @@ const dragable = (({ size = 50, initPos = { x: 0, y: 0 } }) => (Content) =>
       ]).start();
     };
 
-    onStart = evt => {
-      console.log('允许手势');
+    mntCallback = (content) => {
+      Object.keys(callbacks).forEach(callbackName => {
+        const funName = callbacks[callbackName];
+        callbacks[callbackName] = content[funName];
+      });
+    }
+
+    onStart = (evt, gestureState) => {
       this.setState({ focus: true });
     };
 
@@ -59,6 +65,10 @@ const dragable = (({ size = 50, initPos = { x: 0, y: 0 } }) => (Content) =>
       destPos.y = Math.max(0, destPos.y);
       destPos.y = Math.min(DEVICE_HEIGHT - size, destPos.y);
 
+      // 区分 点击 和 拖拽
+      if (this.currPos.x == destPos.x && this.currPos.y == destPos.y) {
+        callbacks.onClick && callbacks.onClick();
+      }
       this.currPos = destPos;
 
       // 位置还原
@@ -92,7 +102,7 @@ const dragable = (({ size = 50, initPos = { x: 0, y: 0 } }) => (Content) =>
               translateY: position.y
             }]
           }} {...this._gestureHandlers()}>
-          <Content focus={focus} />
+          <Content ref={this.mntCallback} focus={focus} />
         </Animated.View>
       );
     }
