@@ -4,9 +4,8 @@ import {
   View, Text, TouchableHighlight, ScrollView
 } from 'react-native';
 import Icon from 'react-native-vector-icons/dist/AntDesign';
-import { goBack, fetchCurrRoute } from 'MYRN/app/utils/route';
 
-class DebugTool extends Component {
+class Console extends Component {
 
   static defaultProps = {
 
@@ -14,7 +13,9 @@ class DebugTool extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      messages: []
+    };
   }
 
   componentDidMount () {
@@ -25,27 +26,25 @@ class DebugTool extends Component {
 
   }
 
+  clearConsole = () => {
+    this.setState({
+      messages: []
+    });
+  }
+
   render () {
     return (
       <View style={styles.wrapper}>
-        <View style={styles.topBanner}>
-          <ScrollView
-            horizontal
-            style={styles.topBannerScroll}
-          >
-            <Text>胡雨胡雨胡雨胡雨胡雨胡雨胡雨</Text>
-            <Text>测试测试测试测试测试测试测试测试</Text>
-          </ScrollView>
+        <View style={styles.controlPanel}>
           <TouchableHighlight
-            onPress={this.props.close}
-            style={styles.closeBtn}
+            onPress={this.clearConsole}
+            style={styles.clear}
             underlayColor="transparent"
             activeOpacity={0.7}
           >
-            <Icon name="closecircleo" style={styles.closeIcon} />
+            <Icon name="delete" style={styles.clearIcon} />
           </TouchableHighlight>
         </View>
-
       </View>
     );
   }
@@ -53,25 +52,21 @@ class DebugTool extends Component {
 
 const styles = EStyleSheet.create({
   wrapper: {
-    width: '100%', height: '80%',
-    position: 'absolute', bottom: 0,
-    backgroundColor: '#fff', opacity: 0.9,
+    width: '100%', height: '100%'
   },
-  topBanner: {
-    backgroundColor: 'rgb(33, 150, 243)',
-    width: '100%', height: 30,
+  controlPanel: {
+    height: '40rem',
+    paddingHorizontal: '10rem',
     flexDirection: 'row', alignItems: 'center',
+    borderColor: '#eceffe', borderBottomWidth: 1
   },
-  topBannerScroll: {
-    flex: 1,
-  },
-  closeBtn: {
+  clear: {
     width: '40rem', height: '100%',
-    alignItems: 'center', justifyContent: 'center',
+    alignItems: 'center', justifyContent: 'center'
   },
-  closeIcon: {
-    fontSize: '24rem', color: '#fff', height: '24rem'
-  },
+  clearIcon: {
+    fontSize: '24rem', color: '#707d8b', height: '24rem'
+  }
 });
 
-export default DebugTool;
+export default Console;

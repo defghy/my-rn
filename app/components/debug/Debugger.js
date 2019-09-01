@@ -44,9 +44,8 @@ class DebugTool extends Component {
     const { activeTab } = this.state;
     const isActive = activeTab === item.key;
     return (
-      <View>
+      <View key={item.key}>
         <TouchableHighlight
-          key={item.key}
           style={{
             ...tabStyles.item,
             ...(isActive? tabStyles.active: {}),
@@ -64,7 +63,6 @@ class DebugTool extends Component {
         </TouchableHighlight>
         { isActive && <View style={tabStyles.bottomBar}></View> }
       </View>
-
     );
   }
 
@@ -89,15 +87,17 @@ class DebugTool extends Component {
             <Icon name="closecircleo" style={styles.closeIcon} />
           </TouchableHighlight>
         </View>
-        <View style={styles.body}>
-{/*          {this.modules.map(item => {
-            const Comp = item.comp;
-            return <Comp
-              style={activeTab == item.key? styles.hide: {}}
-              key={item.key}
-            />;
-          })}*/}
-        </View>
+        {this.modules.map(item => {
+          const Comp = item.comp;
+          return (
+            <View key={item.key} style={{
+              ...styles.body,
+              ...(activeTab === item.key ? {} : styles.hide)
+            }}>
+              <Comp />
+            </View>
+          );
+        })}
       </View>
     );
   }

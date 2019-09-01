@@ -4,9 +4,8 @@ import {
   View, Text, TouchableHighlight, ScrollView
 } from 'react-native';
 import Icon from 'react-native-vector-icons/dist/AntDesign';
-import { goBack, fetchCurrRoute } from 'MYRN/app/utils/route';
 
-class DebugTool extends Component {
+class Network extends Component {
 
   static defaultProps = {
 
@@ -28,24 +27,7 @@ class DebugTool extends Component {
   render () {
     return (
       <View style={styles.wrapper}>
-        <View style={styles.topBanner}>
-          <ScrollView
-            horizontal
-            style={styles.topBannerScroll}
-          >
-            <Text>胡雨胡雨胡雨胡雨胡雨胡雨胡雨</Text>
-            <Text>测试测试测试测试测试测试测试测试</Text>
-          </ScrollView>
-          <TouchableHighlight
-            onPress={this.props.close}
-            style={styles.closeBtn}
-            underlayColor="transparent"
-            activeOpacity={0.7}
-          >
-            <Icon name="closecircleo" style={styles.closeIcon} />
-          </TouchableHighlight>
-        </View>
-
+        <Text>Network</Text>
       </View>
     );
   }
@@ -74,4 +56,4 @@ const styles = EStyleSheet.create({
   },
 });
 
-export default DebugTool;
+export default Network;
