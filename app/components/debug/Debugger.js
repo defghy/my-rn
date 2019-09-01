@@ -4,21 +4,27 @@ import {
   View, Text, TouchableHighlight, ScrollView
 } from 'react-native';
 import Icon from 'react-native-vector-icons/dist/AntDesign';
-import { goBack, fetchCurrRoute } from 'MYRN/app/utils/route';
+
+import Console from './components/Console';
+import Network from './components/Network';
 
 class DebugTool extends Component {
 
   static defaultProps = {
-    left: null,  // 左侧组件
-    leftAction: goBack, // 左侧行为
-    title: '',   // 标题
-    right: null   // 右侧组件
+
   };
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      activeTab: 'CONSOLE'
+    };
   }
+
+  modules = [
+    { key: 'CONSOLE', name: 'Console', comp: Console },
+    { key: 'NETWORK', name: 'Network', comp: Network },
+  ];
 
   componentDidMount () {
 
@@ -28,15 +34,70 @@ class DebugTool extends Component {
 
   }
 
+  changeTab = item => {
+    this.setState({
+      activeTab: item.key
+    });
+  };
+
+  _renderTab (item) {
+    const { activeTab } = this.state;
+    const isActive = activeTab === item.key;
+    return (
+      <View>
+        <TouchableHighlight
+          key={item.key}
+          style={{
+            ...tabStyles.item,
+            ...(isActive? tabStyles.active: {}),
+          }}
+          onPress={() => this.changeTab(item)}
+          underlayColor="transparent"
+          activeOpacity={0.7}
+        >
+          <Text
+            style={{
+              ...tabStyles.text,
+              ...(isActive ? tabStyles.textActive : {}),
+            }}
+          >{item.name}</Text>
+        </TouchableHighlight>
+        { isActive && <View style={tabStyles.bottomBar}></View> }
+      </View>
+
+    );
+  }
+
   render () {
+    const { activeTab } = this.state;
+
     return (
       <View style={styles.wrapper}>
-        <ScrollView
-          horizontal
-          style={styles.topBanner}
-        >
-          <Text>胡雨</Text>
-        </ScrollView>
+        <View style={styles.topBanner}>
+          <ScrollView
+            horizontal
+            style={styles.topBannerScroll}
+          >
+            {this.modules.map(item => this._renderTab(item))}
+          </ScrollView>
+          <TouchableHighlight
+            onPress={this.props.close}
+            style={styles.closeBtn}
+            underlayColor="transparent"
+            activeOpacity={0.7}
+          >
+            <Icon name="closecircleo" style={styles.closeIcon} />
+          </TouchableHighlight>
+        </View>
+        <View style={styles.body}>
+{/*          {this.modules.map(item => {
+            const Comp = item.comp;
+            return <Comp
+              style={activeTab == item.key? styles.hide: {}}
+              key={item.key}
+            />;
+          })}*/}
+        </View>
       </View>
     );
   }
@@ -46,11 +107,55 @@ const styles = EStyleSheet.create({
   wrapper: {
     width: '100%', height: '80%',
     position: 'absolute', bottom: 0,
-    backgroundColor: '#fff', opacity: 0.9
+    backgroundColor: '#fff', opacity: 0.9,
   },
   topBanner: {
     backgroundColor: 'rgb(33, 150, 243)',
     width: '100%', height: 30,
+    flexDirection: 'row', alignItems: 'center',
+    borderColor: '#999', borderBottomWidth: 1
+  },
+  topBannerScroll: {
+    height: '100%',
+    flex: 1,
+  },
+  closeBtn: {
+    width: '40rem', height: '100%',
+    alignItems: 'center', justifyContent: 'center',
+  },
+  closeIcon: {
+    fontSize: '24rem', color: '#fff', height: '24rem'
+  },
+  hide: {
+    display: 'none'
+  },
+  body: {
+    flex: 1
+  }
+});
+
+const tabStyles = EStyleSheet.create({
+  item: {
+    height: '100%',
+    paddingHorizontal: '10rem',
+    flexDirection: 'row', alignItems: 'center',
+    position: 'relative'
+  },
+  active: {
+    backgroundColor: '#eceffe',
+    opacity: 0.5,
+    borderColor: '#fff', borderBottomWidth: '2rem',
+  },
+  text: {
+    color: '#fff', fontSize: '14rem', fontWeight: 'bold'
+  },
+  textActive: {
+    color: '#263238',
+  },
+  bottomBar: {
+    width: '100%', height: '3rem',
+    position: 'absolute', bottom: 0, left: 0,
+    backgroundColor: '#fff'
   }
 });
 
