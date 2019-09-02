@@ -4,6 +4,8 @@ import {
   View, Text, TouchableHighlight, ScrollView
 } from 'react-native';
 import Icon from 'react-native-vector-icons/dist/AntDesign';
+import HTMLView from 'react-native-htmlview';
+import HTML from 'react-native-render-html';
 
 class Console extends Component {
 
@@ -45,6 +47,14 @@ class Console extends Component {
             <Icon name="delete" style={styles.clearIcon} />
           </TouchableHighlight>
         </View>
+        <View style={styles.body}>
+          <HTMLView
+            value={`<div><span style="color: #a71d5d;">a</span>: <span style="color: #0086b3;">1</span>, <span style="color: #a71d5d;">b</span>: <span style="color: #0086b3;">2</span>, <span style="color: #a71d5d;">c</span>: <span style="color: #0086b3;">3</span>, <span style="color: #a71d5d;">ddafasdfasdfasfdf</span>: <span style="color: #0086b3;">4</span>, <span style="color: #a71d5d;">sadfasdfasdfdasf</span>: <span style="color: #0086b3;">5</span></div>`}
+          />
+          <HTML
+            html={`<div><span style="color: #a71d5d;">a</span>: <span style="color: #0086b3;">1</span>, <span style="color: #a71d5d;">b</span>: <span style="color: #0086b3;">2</span>, <span style="color: #a71d5d;">c</span>: <span style="color: #0086b3;">3</span>, <span style="color: #a71d5d;">ddafasdfasdfasfdf</span>: <span style="color: #0086b3;">4</span>, <span style="color: #a71d5d;">sadfasdfasdfdasf</span>: <span style="color: #0086b3;">5</span></div>`}
+          />
+        </View>
       </View>
     );
   }
@@ -66,6 +76,9 @@ const styles = EStyleSheet.create({
   },
   clearIcon: {
     fontSize: '24rem', color: '#707d8b', height: '24rem'
+  },
+  body: {
+    flex: 1
   }
 });
 
