@@ -19,6 +19,8 @@ export const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ?
 
 export const BASE_URL = 'https://crm-manager.stage.yunshanmeicai.com';
 
+global.USE_DEBUG = true;
+
 export {
   DEVICE_HEIGHT,
   DEVICE_WIDTH

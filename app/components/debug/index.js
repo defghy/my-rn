@@ -51,6 +51,11 @@ class DebugTool extends Component {
   render () {
     const { focus } = this.props;
     const { showDebug } = this.state;
+
+    if (!global.USE_DEBUG) {
+      return null;
+    }
+
     return (
       <View style={{...styles.trigger, ...{opacity: focus? 0.6: 0.3 }}}>
         <Icon
