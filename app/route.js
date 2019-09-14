@@ -1,4 +1,5 @@
 import { createBottomTabNavigator, createAppContainer, createStackNavigator } from 'react-navigation';
+import { setRouters } from 'MYRN/app/utils/route'
 
 export const routers = {
   '/base/home': require('./pages/dashboard/Home/Home').default,
@@ -13,6 +14,7 @@ export const routers = {
   '/gesture/drag': { title: '拖拽测试', screen: require('./pages/Gesture/Drag').default },
   '/native/modules': { title: 'nativeModules测试', screen: require('./pages/Native/NativeModules').default },
 };
+setRouters(routers)
 
 const stackRouter = createStackNavigator(routers, {
   initialRouteName: '/base/home',
