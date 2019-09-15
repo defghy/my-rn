@@ -4,7 +4,6 @@ import {
   View, Text, TouchableHighlight, ScrollView
 } from 'react-native';
 import Icon from 'react-native-vector-icons/dist/AntDesign';
-import HTMLView from 'react-native-htmlview';
 import HTML from 'react-native-render-html';
 
 import { formatConsole } from './util';
@@ -111,9 +110,6 @@ class Console extends Component {
         underlayColor="#f5f5f9"
         key={msgItem.uid}
       >
-        {/*        <HTMLView
-          value={htmlStr}
-        />*/}
         <View
           style={{
             ...logStyles.common,
