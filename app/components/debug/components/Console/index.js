@@ -24,7 +24,7 @@ const CONSOLE_METHOD = [
   // 'debug'
 ];
 const winConsole = console;
-const messages = [];
+let messages = [];
 let comp = null;
 
 // 全局开关
@@ -84,34 +84,61 @@ class Console extends Component {
   }, {})
 
   clearConsole = () => {
+    messages = [];
     this.setState({
       messages: []
+    });
+  }
+
+  openLogItem = (msgItem) => {
+    msgItem.isOpen = !msgItem.isOpen;
+    this.setState({
+      messages: [...this.state.messages]
     });
   }
 
   _renderLogItem(msgItem) {
     const { type } = msgItem;
 
-    const { msg, detail = '' } = formatConsole(msgItem) || `<div><span style="color: #a71d5d;">a</span>: <span style="color: #0086b3;">1</span>, <span style="color: #a71d5d;">b</span>: <span style="color: #0086b3;">2</span>, <span style="color: #a71d5d;">c</span>: <span style="color: #0086b3;">3</span>, <span style="color: #a71d5d;">ddafasdfasdfasfdf</span>: <span style="color: #0086b3;">4</span>, <span style="color: #a71d5d;">sadfasdfasdfdasf</span>: <span style="color: #0086b3;">5</span></div>`
+    if (!msgItem.output) {
+      msgItem.output = formatConsole(msgItem)
+    }
+
+    const { msg, detail = '' } = msgItem.output
     return (
-      <View
+      <TouchableHighlight
+        onPress={() => this.openLogItem(msgItem)}
+        underlayColor="#f5f5f9"
         key={msgItem.uid}
-        style={{
-          ...logStyles.common,
-          ...(logStyles[type] || {}),
-        }}
       >
         {/*        <HTMLView
           value={htmlStr}
         />*/}
-        <HTML
-          html={msg}
-          baseFontStyle={{
-            ...logTextStyles.common,
-            ...(logTextStyles[type] || {}),
+        <View
+          style={{
+            ...logStyles.common,
+            ...(logStyles[type] || {}),
           }}
-        />
-      </View>
+        >
+          <HTML
+            html={msg}
+            baseFontStyle={{
+              ...logTextStyles.common,
+              ...(logTextStyles[type] || {}),
+            }}
+          />
+          { !!msgItem.isOpen && !!detail &&
+            <HTML
+              html={detail}
+              containerStyle={logStyles.detail}
+              baseFontStyle={{
+                ...logTextStyles.common,
+                ...(logTextStyles[type] || {}),
+              }}
+            />
+          }
+        </View>
+      </TouchableHighlight>
     );
   }
 
@@ -163,6 +190,9 @@ const logStyles = EStyleSheet.create({
   common: {
     borderBottomWidth: 1,
     paddingVertical: 3, paddingLeft: 10
+  },
+  detail: {
+    paddingVertical: 10, paddingLeft: 5
   },
   warn: {
     backgroundColor: '#fffbe6', borderColor: '#ffc107',

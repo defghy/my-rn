@@ -2,16 +2,37 @@ import beautify from 'js-beautify'
 import getAbstract from '../../lib/getAbstract';
 import { escape } from '../../lib/util';
 
+const stringify = function (obj) {
+  let res;
+  try {
+    res = JSON.stringify(obj);
+  } catch (e) {
+    res = Object.keys(obj).map(key => {
+      let val = obj[key];
+      return `${key}: ${val ? val.toString() : val + ''}`;
+    }).join(', ');
+    res = `{ ${res} }`;
+  }
+
+  return res;
+};
+
 function formatFn(val) {
   return `<pre>${beautify.js(val.toString())}</pre>`
 }
 
 function formatObj(val) {
-  return `Object ${getAbstract(val)}`
+  return {
+    msg: `Object ${getAbstract(val)}`,
+    detail: stringify(val)
+  }
 }
 
 function formatArr(val) {
-  return `Array(${val.length}) ${getAbstract(val)}`
+  return {
+    msg: `Array(${val.length}) ${getAbstract(val)}`,
+    detail: stringify(val)
+  }
 }
 
 function formatStr(val) {
@@ -51,12 +72,14 @@ function formatMsg(args, { htmlForEl = true } = {}) {
   args.forEach((val, i) => {
     const type = Object.prototype.toString.call(val);
     const handler = formatHandlers[type] || formatHandlers['[object String]'];
-    result[i] = handler(val);
+    const res = handler(val);
+    result[i] = typeof res === 'object'?
+      res :  { msg: res, detail: '' }
   });
 
   return {
-    msg: result.join(' '),
-    detail: ''
+    msg: result.map(res => res.msg).join(' '),
+    detail: result.filter(res => res.detail).map(res => res.detail).join('<br />'),
   }
 
 }
