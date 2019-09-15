@@ -1,6 +1,14 @@
 ## 说明
 react native脚手架，用于日常开发
 
+## install
+```
+// 根目录
+npm install
+// 子模块儿单独安装
+cd app/components/debug && npm install
+```
+
 ## 启动
 
 #### Android
