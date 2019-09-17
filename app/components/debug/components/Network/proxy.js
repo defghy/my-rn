@@ -4,6 +4,27 @@ import { uid } from '../../lib/util'
 let reqs = [];
 let comp = null;
 
+export const parseUrl = (link) => {
+  if (!link) {
+    return {}
+  }
+  let [ protocal, loc ] = link && link.split('//');
+  let urlUnits = loc.split('/');
+  let domain = urlUnits[0];
+  let url = urlUnits.slice(1).join('/');
+  let [href, hash] = url && url.split('#');
+  let [pathname, search] = href && href.split('?');
+  const pathanmes = pathname.split('/');
+  return {
+    protocal,
+    domain,
+    lastPath: pathanmes[pathanmes.length - 1],
+    pathname,
+    hash,
+    search,
+  }
+}
+
 // XMLHttpRequest
 const XMLHttpRequestProxy = {
   open(method, url) {
@@ -11,7 +32,8 @@ const XMLHttpRequestProxy = {
     xhr.rnRequest = {
       uid: uid(),
       method,
-      url
+      url,
+      urlObj: parseUrl(url)
     }
 
     const handlers = {
