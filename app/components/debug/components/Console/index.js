@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import debounce from 'lodash/debounce'
 import {
   View, Text, TouchableHighlight, ScrollView
 } from 'react-native';
@@ -40,8 +41,9 @@ if (global.USE_DEBUG) {
         if (args.length > 0 && handler) {
           handler(msgItem);
         }
+      } else {
+        messages.push(msgItem);
       }
-      messages.push(msgItem);
 
       // 原始调用
       origin(...args);
@@ -72,22 +74,23 @@ class Console extends Component {
 
   handlers = CONSOLE_METHOD.reduce((data, funName) => {
     data[funName] = (msgItem) => {
-      const { messages } = this.state;
-      messages.push(msgItem);
-      setTimeout(() => {
-        this.setState({
-          messages: [...messages]
-        });
-      }, 1000)
-
+      this.state.messages.push(msgItem);
+      this.debounceRender()
     };
     return data;
   }, {})
 
-  clearConsole = () => {
-    messages = [];
+  debounceRender = debounce(() => {
     this.setState({
-      messages: []
+      messages: [...this.state.messages]
+    });
+  }, 300)
+
+  clearConsole = () => {
+    const { messages } = this.state;
+    messages.splice(0, messages.length)
+    this.setState({
+      messages: [...messages]
     });
   }
 

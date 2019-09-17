@@ -74,8 +74,9 @@ const XMLHttpRequestProxy = {
     })
     if (comp) {
       comp.addReq(xhr)
+    } else {
+      reqs.push(xhr)
     }
-    reqs.push(xhr)
   },
   setRequestHeader() {
     const req = this.rnRequest

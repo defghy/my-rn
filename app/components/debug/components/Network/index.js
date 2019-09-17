@@ -36,9 +36,10 @@ class Network extends Component {
   }
 
   clearReq = () => {
-    setProxyData({ reqs: [] })
+    const { reqs } = this.state;
+    reqs.splice(0, reqs.length);
     this.setState({
-      reqs: []
+      reqs: [...reqs]
     });
   }
 
