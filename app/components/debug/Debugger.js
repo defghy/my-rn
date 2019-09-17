@@ -17,7 +17,7 @@ class DebugTool extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeTab: 'CONSOLE'
+      activeTab: 'Network'
     };
   }
 

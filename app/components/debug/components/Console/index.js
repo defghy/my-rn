@@ -40,9 +40,8 @@ if (global.USE_DEBUG) {
         if (args.length > 0 && handler) {
           handler(msgItem);
         }
-      } else {
-        messages.push(msgItem);
       }
+      messages.push(msgItem);
 
       // 原始调用
       origin(...args);
@@ -68,16 +67,19 @@ class Console extends Component {
   }
 
   componentWillUnmount() {
-
+    comp = null;
   }
 
   handlers = CONSOLE_METHOD.reduce((data, funName) => {
     data[funName] = (msgItem) => {
       const { messages } = this.state;
       messages.push(msgItem);
-      this.setState({
-        messages: [...messages]
-      });
+      setTimeout(() => {
+        this.setState({
+          messages: [...messages]
+        });
+      }, 1000)
+
     };
     return data;
   }, {})

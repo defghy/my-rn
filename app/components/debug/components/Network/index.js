@@ -3,7 +3,8 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import {
   View, Text, TouchableHighlight, ScrollView
 } from 'react-native';
-import Icon from 'react-native-vector-icons/dist/AntDesign';
+
+import { setProxyData, reqs as cachedReqs } from './proxy'
 
 class Network extends Component {
 
@@ -13,15 +14,32 @@ class Network extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      reqs: cachedReqs
+    };
   }
 
   componentDidMount () {
-
+    setProxyData({ comp: this });
   }
 
   componentWillUnmount() {
+    setProxyData({ comp: null });
+  }
 
+  addReq = (req) => {
+    const { reqs } = this.state;
+    reqs.push(req);
+    this.setState({
+      reqs: [...reqs]
+    });
+  }
+
+  clearReq = () => {
+    setProxyData({ reqs: [] })
+    this.setState({
+      reqs: []
+    });
   }
 
   render () {
@@ -50,9 +68,6 @@ const styles = EStyleSheet.create({
   closeBtn: {
     width: '40rem', height: '100%',
     alignItems: 'center', justifyContent: 'center',
-  },
-  closeIcon: {
-    fontSize: '24rem', color: '#fff', height: '24rem'
   },
 });
 

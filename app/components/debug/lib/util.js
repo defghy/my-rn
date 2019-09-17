@@ -168,3 +168,5 @@ export var getObjType = _.getObjType = (function (exports) {
 
     return exports;
 })({});
+
+export const uid = () => `${new Date().getTime()}_${Math.random()}`
