@@ -25,7 +25,7 @@ function NetworkLine(props) {
     </View>
   );
 
-  const renderItem = ({ value, width, align, type }) => (
+  const renderItem = ({ value, width = 'auto', align, type, color = '#333' }) => (
     <View style={{
       ...styles.commonItem,
       ...{
@@ -36,6 +36,7 @@ function NetworkLine(props) {
       <Text
         style={{
           ...styles.textCommon,
+          ...{ color },
           ...(isError ? styles.textError : {})
         }}>{value}</Text>
     </View>
@@ -46,10 +47,12 @@ function NetworkLine(props) {
       onPress={() => openItem(item)}
       underlayColor="#f5f5f9"
     >
-      <View style={{
-        ...(isOdd? styles.oddLine: styles.evenLine),
-        ...styles.wrapper
-      }}>
+      <ScrollView contentContainerStyle={{
+          ...(isOdd ? styles.oddLine : styles.evenLine),
+          ...styles.wrapper
+        }}
+        horizontal={true}
+      >
         {renderPath()}
         {renderItem({
           type: 'statusCode',
@@ -71,7 +74,11 @@ function NetworkLine(props) {
           type: 'time',
           value: rnRequest.time, align: 'flex-start', width: 50
         })}
-      </View>
+        {renderItem({
+          type: 'url',
+          value: rnRequest.urlObj.href, align: 'flex-start', color: 'rgb(33, 150, 243)'
+        })}
+      </ScrollView>
     </TouchableHighlight>
   );
 }
@@ -79,7 +86,8 @@ function NetworkLine(props) {
 const styles = EStyleSheet.create({
   wrapper: {
     flexDirection: 'row', alignItems: 'center',
-    height: 40
+    height: 40,
+    paddingRight: 10
   },
   oddLine: {
 
@@ -91,7 +99,7 @@ const styles = EStyleSheet.create({
 
   },
   textCommon: {
-    fontSize: 12
+    fontSize: 12, color: '#333'
   },
   textError: {
     color: 'rgb(230, 0, 0)'

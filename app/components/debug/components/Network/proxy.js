@@ -22,6 +22,7 @@ export const parseUrl = (link) => {
     pathname,
     hash,
     search,
+    href: `${protocal}//${domain}/${pathname}`
   }
 }
 

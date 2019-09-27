@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, PanResponder } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { inject, observer } from 'mobx-react';
+import { fetchError } from 'MYRN/app/utils/request/api/test';
 
 import Page from 'MYRN/app/components/layout/Page';
 import Header from 'MYRN/app/components/layout/Header';
@@ -16,6 +17,7 @@ class AjaxTest extends React.Component {
     await user.fetchTextConfig({
       tool_item_key: ["gpsplit_vow"]
     });
+    await fetchError();
   }
 
   render() {
