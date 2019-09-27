@@ -87,7 +87,8 @@ const styles = EStyleSheet.create({
   wrapper: {
     flexDirection: 'row', alignItems: 'center',
     height: 40,
-    paddingRight: 10
+    paddingRight: 10,
+    borderColor: '#eceffe', borderBottomWidth: EStyleSheet.hairlineWidth,
   },
   oddLine: {
 
