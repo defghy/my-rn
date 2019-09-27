@@ -5,7 +5,9 @@ import {
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/dist/AntDesign';
-import { setProxyData, reqs as cachedReqs } from './proxy'
+import { setProxyData, reqs as cachedReqs } from './proxy';
+
+import NetworkLine from './components/NetworkLine';
 
 class Network extends Component {
 
@@ -48,27 +50,6 @@ class Network extends Component {
 
   }
 
-  _renderItem(item) {
-    const { rnRequest } = item;
-    const { urlObj } = rnRequest;
-    return (
-      <TouchableHighlight
-        key={rnRequest.uid}
-        onPress={() => this.openItem(item)}
-        underlayColor="#f5f5f9"
-      >
-        <View style={netStyles.wrapper}>
-          <View style={netStyles.pathname}>
-            <Text numberOfLines={5}
-              style={{
-                ...netStyles.textCommon
-              }}>{urlObj.lastPath || urlObj.domain}</Text>
-          </View>
-        </View>
-      </TouchableHighlight>
-    );
-  }
-
   render () {
     const { reqs } = this.state;
     return (
@@ -84,7 +65,14 @@ class Network extends Component {
           </TouchableHighlight>
         </View>
         <ScrollView style={styles.body}>
-          { reqs.map(item => this._renderItem(item)) }
+          { reqs.map((item, index) => (
+            <NetworkLine
+              key={item.rnRequest.uid}
+              item={item}
+              index={index}
+              openItem={this.openItem}
+            />))
+          }
         </ScrollView>
       </View>
     );
@@ -110,18 +98,6 @@ const styles = EStyleSheet.create({
   },
   body: {
     flex: 1
-  }
-});
-
-const netStyles = EStyleSheet.create({
-  wrapper: {
-    flexDirection: 'row', alignItems: 'center'
-  },
-  textCommon: {
-    fontSize: 12
-  },
-  pathname: {
-    width: 150,
   }
 });
 

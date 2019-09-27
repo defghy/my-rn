@@ -13,6 +13,9 @@ class AjaxTest extends React.Component {
   componentDidMount = async () => {
     const { user } = this.props;
     await user.fetchUser();
+    await user.fetchTextConfig({
+      tool_item_key: ["gpsplit_vow"]
+    });
   }
 
   render() {

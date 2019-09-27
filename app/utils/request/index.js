@@ -3,8 +3,7 @@ import { BASE_URL } from 'MYRN/app/utils/global';
 
 // 注册一个主实例
 const req = axios.create({
-  baseURL: `${BASE_URL}/api`,
-  method: 'POST'
+  baseURL: `${BASE_URL}/api`
 });
 
 // 剥离无意义数据
@@ -22,6 +21,7 @@ req.interceptors.response.use(function (response) {
   return response.data;
 });
 
-export default function request (url, option = {}) {
-  return req({ url, ...option });
+export default function request (url, option = { }) {
+  option.method = option.method || 'post';
+  return req.request({ url, ...option });
 }

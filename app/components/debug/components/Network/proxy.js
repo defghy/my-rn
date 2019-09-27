@@ -1,4 +1,4 @@
-import { getType, getHeaders, readBlobAsText } from './util'
+import { getType, getHeaders, readBlobAsText, getSize, getDiffTime } from './util'
 import { uid } from '../../lib/util'
 
 let reqs = [];
@@ -42,7 +42,7 @@ const XMLHttpRequestProxy = {
         Object.assign(xhr.rnRequest, {
           type: type.type,
           subType: type.subType,
-          size: xhr.getResponseHeader('Content-Length'),
+          size: getSize(xhr, true),
           time: new Date().getTime(),
           resHeaders: getHeaders(xhr),
           reqHeaders: (xhr.erudaRequest && xhr.erudaRequest._headers) || null
@@ -53,11 +53,12 @@ const XMLHttpRequestProxy = {
         let resTxt = ''
 
         const update = () => {
+          const diff = new Date().getTime() - xhr.rnRequest.startTime;
           Object.assign(xhr.rnRequest, {
             status: xhr.status,
             done: true,
-            size: xhr.getResponseHeader('Content-Length'),
-            time: new Date().getTime(),
+            size: getSize(xhr, false),
+            time: getDiffTime(diff),
             resTxt
           });
         }
@@ -92,7 +93,8 @@ const XMLHttpRequestProxy = {
   send(data) {
     const xhr = this;
     Object.assign(xhr.rnRequest, {
-      data: typeof data === 'string'? data: ''
+      data: typeof data === 'string'? data: '',
+      startTime: new Date().getTime()
     })
     if (comp) {
       comp.addReq(xhr)
