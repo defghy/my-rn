@@ -8,6 +8,7 @@ import Icon from 'react-native-vector-icons/dist/AntDesign';
 import { setProxyData, reqs as cachedReqs } from './proxy';
 
 import NetworkLine from './components/NetworkLine';
+import NetworkDetail from './components/NetworkDetail';
 
 class Network extends Component {
 
@@ -34,7 +35,13 @@ class Network extends Component {
     const { reqs } = this.state;
     reqs.push(req);
     this.setState({
-      reqs: [...reqs]
+      reqs: [...reqs],
+    });
+  }
+
+  freshReq = () => {
+    this.setState({
+      reqs: [...this.state.reqs],
     });
   }
 
@@ -47,7 +54,9 @@ class Network extends Component {
   }
 
   openItem = item => {
-
+    if (this.detailRef) {
+      this.detailRef.open({ detail: item })
+    }
   }
 
   render () {
@@ -74,6 +83,7 @@ class Network extends Component {
             />))
           }
         </ScrollView>
+        <NetworkDetail ref={ref => (this.detailRef = ref)} />
       </View>
     );
   }
@@ -81,7 +91,7 @@ class Network extends Component {
 
 const styles = EStyleSheet.create({
   wrapper: {
-    width: '100%', height: '100%'
+    width: '100%', height: '100%', position: 'relative'
   },
   panel: {
     height: '40rem',

@@ -1,12 +1,12 @@
-import { getType, getHeaders, readBlobAsText, getSize, getDiffTime } from './util'
-import { uid } from '../../lib/util'
+import { getType, getHeaders, readBlobAsText, getSize, getDiffTime } from './util';
+import { uid } from '../../lib/util';
 
 let reqs = [];
 let comp = null;
 
 export const parseUrl = (link) => {
   if (!link) {
-    return {}
+    return {};
   }
   let [ protocal, loc ] = link && link.split('//');
   let urlUnits = loc.split('/');
@@ -22,47 +22,62 @@ export const parseUrl = (link) => {
     pathname,
     hash,
     search,
-    href: `${protocal}//${domain}/${pathname}`
-  }
-}
+    href: `${protocal}//${domain}/${pathname}`,
+  };
+};
 
 // XMLHttpRequest
 const XMLHttpRequestProxy = {
   open(method, url) {
-    const xhr = this
+    const xhr = this;
     xhr.rnRequest = {
       uid: uid(),
       method,
       url,
-      urlObj: parseUrl(url)
-    }
+      urlObj: parseUrl(url),
+    };
+
+    const update = function(req) {
+      Object.assign(xhr.rnRequest, req);
+      if (comp) {
+        comp.freshReq();
+      }
+    };
 
     const handlers = {
       2: function() {
-        const type = getType(xhr.getResponseHeader('Content-Type'))
-        Object.assign(xhr.rnRequest, {
+        const type = getType(xhr.getResponseHeader('Content-Type'));
+        update({
           type: type.type,
           subType: type.subType,
           size: getSize(xhr, true),
           time: new Date().getTime(),
           resHeaders: getHeaders(xhr),
-          reqHeaders: (xhr.erudaRequest && xhr.erudaRequest._headers) || null
+          reqHeaders: (xhr.rnRequest && xhr.rnRequest._headers) || {}
         });
       },
       4: function() {
         const resType = xhr.responseType
         let resTxt = ''
 
-        const update = () => {
+        const updateReq = () => {
           const diff = new Date().getTime() - xhr.rnRequest.startTime;
-          Object.assign(xhr.rnRequest, {
+
+          let formatResTxt = resTxt;
+          if (resTxt.startsWith('{')) {
+            try {
+              formatResTxt = JSON.stringify(JSON.parse(resTxt));
+            } catch (e) {}
+          }
+
+          update({
             status: xhr.status,
             done: true,
             size: getSize(xhr, false),
             time: getDiffTime(diff),
-            resTxt
+            resTxt: formatResTxt,
           });
-        }
+        };
 
         const type = getType(xhr.getResponseHeader('Content-Type'))
         if (
@@ -72,23 +87,30 @@ const XMLHttpRequestProxy = {
             type.subType === 'json')
         ) {
           readBlobAsText(xhr.response, (err, result) => {
-            if (result) resTxt = result
-            update()
-          })
+            if (err) {}
+            if (result) {
+              resTxt = result;
+            }
+            updateReq();
+          });
         } else {
-          if (resType === '' || resType === 'text') resTxt = xhr.responseText
-          if (resType === 'json') resTxt = JSON.stringify(xhr.response)
+          if (resType === '' || resType === 'text') {
+            resTxt = xhr.responseText;
+          }
+          if (resType === 'json') {
+            resTxt = JSON.stringify(xhr.response);
+          }
 
-          update()
+          updateReq();
         }
       },
-      noop: function() {}
+      noop: function() {},
     };
 
     xhr.addEventListener('readystatechange', function() {
-      const handler = handlers[xhr.readyState] || handlers.noop
+      const handler = handlers[xhr.readyState] || handlers.noop;
       handler();
-    })
+    });
 
   },
   send(data) {
@@ -108,12 +130,12 @@ const XMLHttpRequestProxy = {
     if (!req._headers) {
       req._headers = {}
     }
-    const key = arguments[0]
-    const val = arguments[1]
+    const key = arguments[0];
+    const val = arguments[1];
     if (key && val) {
-      req._headers[key] = val
+      req._headers[key] = val;
     }
-  }
+  },
 };
 if (global.USE_DEBUG) {
   const xhrproto = XMLHttpRequest.prototype;
@@ -125,8 +147,8 @@ if (global.USE_DEBUG) {
 
       // 原始调用
       origin.apply(this, args);
-    }
-  })
+    };
+  });
 }
 
 export const setProxyData = (data) => {
@@ -138,5 +160,5 @@ export const setProxyData = (data) => {
   }
 };
 export {
-  reqs
+  reqs,
 };

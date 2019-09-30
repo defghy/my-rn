@@ -11,10 +11,10 @@ export function getType(contentType) {
 
 export function getDiffTime(millSeconds) {
   if (millSeconds > 1000 * 60 ) {
-    return (millSeconds/ (1000 * 60)).toFixed(2) + 'm';
+    return (millSeconds/ (1000 * 60)).toFixed(1) + 'm';
   }
   if (millSeconds > 1000 ) {
-    return (millSeconds/ (1000)).toFixed(2) + 's';
+    return (millSeconds/ (1000)).toFixed(1) + 's';
   }
   return millSeconds + 'ms'
 }
@@ -63,7 +63,7 @@ export function getSize(xhr, headersOnly) {
       if (bytes <= 0) return '0';
       var suffixIdx = Math.floor(Math.log(bytes) / Math.log(1024)),
           val = bytes / Math.pow(2, suffixIdx * 10);
-      return +val.toFixed(2) + suffixList[suffixIdx];
+      return +val.toFixed(1) + suffixList[suffixIdx];
   }
 
   function getStrSize() {
