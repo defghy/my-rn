@@ -1,8 +1,7 @@
 ## rn原生调试工具
 
 主要用于后端查看 network 和 console
-![Demo](docs/demo.gif?raw=true "Demo")
-
+<img width="250" src="https://raw.githubusercontent.com/defghy/my-rn/master/docs/demo.gif" />
 
 ## 说明
 需要1个全局开关，否则不会劫持
