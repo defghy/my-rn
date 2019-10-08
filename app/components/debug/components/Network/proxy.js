@@ -38,7 +38,10 @@ const XMLHttpRequestProxy = {
     };
 
     const update = function(req) {
-      Object.assign(xhr.rnRequest, req);
+      Object.assign(xhr.rnRequest, {
+        resHeaders: getHeaders(xhr),
+        reqHeaders: (xhr.rnRequest && xhr.rnRequest._headers) || {}
+      }, req);
       if (comp) {
         comp.freshReq();
       }
@@ -51,9 +54,7 @@ const XMLHttpRequestProxy = {
           type: type.type,
           subType: type.subType,
           size: getSize(xhr, true),
-          time: new Date().getTime(),
-          resHeaders: getHeaders(xhr),
-          reqHeaders: (xhr.rnRequest && xhr.rnRequest._headers) || {}
+          time: new Date().getTime()
         });
       },
       4: function() {
@@ -75,7 +76,7 @@ const XMLHttpRequestProxy = {
             done: true,
             size: getSize(xhr, false),
             time: getDiffTime(diff),
-            resTxt: formatResTxt,
+            resTxt: formatResTxt
           });
         };
 

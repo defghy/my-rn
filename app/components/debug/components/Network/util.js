@@ -20,7 +20,7 @@ export function getDiffTime(millSeconds) {
 }
 
 export function getHeaders(xhr) {
-  const raw = xhr.getAllResponseHeaders(),
+  const raw = xhr.getAllResponseHeaders() || '',
     lines = raw.split('\n')
 
   const ret = {}
